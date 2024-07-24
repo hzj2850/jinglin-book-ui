@@ -1,0 +1,121 @@
+@import url('./icon/iconfont.css');
+@ant-table-border-color: #f0f0f0;
+@ant-table-header-color: #fafafa;
+@ant-table-hover-color: #fafafa;
+@ant-table-tr-height: 48px;
+
+
+.ant-table {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+
+    table {
+        width: 100%;
+        background-color: #fff;
+    }
+
+    th,
+    td {
+        text-align: center;
+        height: @ant-table-tr-height;
+        font-size: 16px;
+        box-shadow: 1px -1px 0 @ant-table-border-color inset;
+    }
+
+    th {
+        background-color: @ant-table-header-color;
+    }
+
+    thead {
+        background-color: #EFEFEF;
+        position: sticky;
+        left: 0;
+        top: 0;
+        z-index: 500;
+    }
+
+    tbody {
+        >tr {
+            &:last-child {
+                td {
+                    box-shadow: 1px 0 0 @ant-table-border-color inset;
+                }
+
+                .fixed-last {
+                    box-shadow: -1px 0 0 @ant-table-border-color inset !important;
+                }
+
+                .fixed-last+td {
+                    box-shadow: none !important;
+                }
+            }
+
+            &:hover {
+                td {
+                    background-color: @ant-table-hover-color;
+                }
+            }
+
+            td {
+                height: @ant-table-tr-height;
+            }
+        }
+    }
+}
+
+.ant-table-body {
+    border: 1px solid @ant-table-border-color;
+    border-radius: 4px;
+    max-height: 100%;
+    overflow: auto;
+    text-align: center;
+    // 隐藏滚动条
+    scrollbar-width: none; // 火狐
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
+
+.td-fixed {
+    position: sticky;
+    background-color: #fff;
+}
+
+.fixed-last {
+    box-shadow: -1px -1px 0 @ant-table-border-color inset !important;
+}
+
+.fixed-last+td,
+.fixed-last+th {
+    box-shadow: 0 -1px 0 @ant-table-border-color inset !important;
+}
+
+
+
+// 展开
+.exIcon {
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+    transition: all 200ms linear;
+}
+
+.exIconOpen {
+    transform: rotate(-180deg);
+}
+
+// 多选框
+.iconcheck {
+    cursor: pointer;
+    user-select: none;
+}
+
+.icon-check2,
+.icon-check3 {
+    color: #1890FF;
+}

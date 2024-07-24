@@ -1,0 +1,51 @@
+@success-color: rgb(0, 235, 44); // 成功色
+@disabled-color: rgb(196, 196, 196); // 失效色
+@warning-color: rgb(255, 213, 30); // 警告色
+@border-color-base: rgb(8, 72, 138); // 边框色
+@alarm-color : rgb(211, 41, 41); // 报警颜色
+@alarm-bg : rgb(137, 0, 0); // 报警颜色
+@text-color: #333; // 主文本色
+
+
+@primary-color: #1890ff; // 全局主色
+@link-color: #1890ff; // 链接色
+@error-color: #f5222d; // 错误色
+
+@heading-color: rgba(0, 0, 0, 0.85); // 标题色
+@text-color-secondary: rgba(0, 0, 0, 0.45); // 次文本色
+@border-radius-base: 4px; // 组件/浮层圆角
+@box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // 浮层阴影
+
+@active-color: #1571F2; // 按钮选中
+@active-default: #D6D6D7; // 按钮没选中
+@header-color: #fff;
+@footer-color: #fff;
+@label-color: #999;
+
+@font-size-title: 17px; // 标题
+@font-size-base: 16px; // 主字号
+@input-height: 40px; // 表单元素高度
+@head-height: 60px; // 头部高度
+@foot-height: 48px; // 底部高度
+
+// 隐藏滚动条方法封装2
+.hidScrollBar() {
+    overflow: auto;
+    scrollbar-width: none; // 火狐
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
+// 搜索框
+.ant-input-search {
+    /deep/ .ant-input-search {
+        border: none;
+
+        &::before {
+            display: none;
+        }
+    }
+}

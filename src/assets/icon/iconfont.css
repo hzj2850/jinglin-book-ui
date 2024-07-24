@@ -1,0 +1,112 @@
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont';  /* Project id 3918579 */
+  src: url('https://at.alicdn.com/t/c/font_3918579_fkt8vp8m21n.woff2?t=1677472678448') format('woff2'),
+       url('https://at.alicdn.com/t/c/font_3918579_fkt8vp8m21n.woff?t=1677472678448') format('woff'),
+       url('https://at.alicdn.com/t/c/font_3918579_fkt8vp8m21n.ttf?t=1677472678448') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xiangyou:before {
+  content: "\e638";
+}
+
+.icon-kaiguankai:before {
+  content: "\e691";
+}
+
+.icon-kaiguan-kai:before {
+  content: "\e604";
+}
+
+.icon-kaiguan-guan:before {
+  content: "\e605";
+}
+
+.icon-a-1xitongzhuye:before {
+  content: "\e67d";
+}
+
+.icon-a-2zongkonghuamian:before {
+  content: "\e67e";
+}
+
+.icon-a-4AHU02kongtiao:before {
+  content: "\e67f";
+}
+
+.icon-a-dingbuyoushangjiaotubiao-1suoxiaoyemian1:before {
+  content: "\e680";
+}
+
+.icon-a-7zhaomingdeng:before {
+  content: "\e681";
+}
+
+.icon-a-11shujuchaxun:before {
+  content: "\e682";
+}
+
+.icon-a-liebiao-4guzhang:before {
+  content: "\e683";
+}
+
+.icon-a-dingbuyoushangjiaotubiao-3guanbi:before {
+  content: "\e684";
+}
+
+.icon-on-off:before {
+  content: "\e685";
+}
+
+.icon-a-5mokuaiji:before {
+  content: "\e686";
+}
+
+.icon-a-12yonghudenglu:before {
+  content: "\e687";
+}
+
+.icon-a-6wenshiduyacha:before {
+  content: "\e688";
+}
+
+.icon-a-liebiao-3kongtiaoyunhang:before {
+  content: "\e689";
+}
+
+.icon-a-8shajundeng:before {
+  content: "\e68a";
+}
+
+.icon-a-3AHU01kongtiao:before {
+  content: "\e68b";
+}
+
+.icon-a-9canshushezhi:before {
+  content: "\e68c";
+}
+
+.icon-a-dingbuyoushangjiaotubiao-2suoxiaoyemian2:before {
+  content: "\e68d";
+}
+
+.icon-a-liebiao-1zhaomingdeng:before {
+  content: "\e68e";
+}
+
+.icon-a-10baojingjilu:before {
+  content: "\e68f";
+}
+
+.icon-a-13yonghuzhuxiao:before {
+  content: "\e690";
+}
+
