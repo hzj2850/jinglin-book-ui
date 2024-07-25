@@ -16,7 +16,7 @@ export default {
   },
   render(h, c) {
     const getObj = (f) => ({
-      class: { btnActive: c.props.tabId == f.value },
+      class: { btnActive: c.props.tabId + "" == f.value + "" },
       on: { click: () => c.listeners.change && c.listeners.change(f) },
     });
     const arr = c.props.tabs.map((f) => h("div", getObj(f), f.label));

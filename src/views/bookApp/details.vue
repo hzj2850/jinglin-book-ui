@@ -1,5 +1,5 @@
 <template>
-    <caseDetails listPath="exaList"/>
+    <caseDetails listPath="appList"/>
 </template>
 
 <script>

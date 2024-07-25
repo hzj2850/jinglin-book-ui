@@ -1,6 +1,6 @@
 <template>
     <div class="ant-list">
-        <headCom/>
+        <headCom :formList="formList" :form="form" @change="onSearch" />
         <ant-btns :tabs="tabs" :tabId="tabId" @change="onTabs" />
         <div class="ant-list-body">
             <slot></slot>
@@ -37,6 +37,13 @@ export default {
             type: Object,
             default: () => ({})
         },
+        form: {
+            type: Object,
+            default: () => ({})
+        },
+        formList: {
+            type: Array
+        },
     },
     watch: {
         spinning(v) {
@@ -49,6 +56,10 @@ export default {
         },
         onSize(v, s) {
             this.$emit('size', v, s);
+        },
+        onSearch() {
+            const obj = this.tabs.find(f => f.value == this.tabId);
+            this.onTabs(obj);
         },
     }
 }

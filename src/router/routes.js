@@ -35,6 +35,30 @@ const routes = [
                 meta: { title: '文书审核', keepAlive: true }
             },
             {
+                path: 'appDetails',
+                name: 'appDetails',
+                component: () => import(/* webpackChunkName: "appDetails" */ '../views/bookApp/details.vue'),
+                meta: { title: '文书审批', keepAlive: true }
+            },
+            {
+                path: 'appList',
+                name: 'appList',
+                component: () => import(/* webpackChunkName: "appList" */ '../views/bookApp/list.vue'),
+                meta: { title: '文书审批', keepAlive: true }
+            },
+            {
+                path: 'IssDetails',
+                name: 'IssDetails',
+                component: () => import(/* webpackChunkName: "IssDetails" */ '../views/bookIss/details.vue'),
+                meta: { title: '文书签发', keepAlive: true }
+            },
+            {
+                path: 'IssList',
+                name: 'IssList',
+                component: () => import(/* webpackChunkName: "IssList" */ '../views/bookIss/list.vue'),
+                meta: { title: '文书签发', keepAlive: true }
+            },
+            {
                 path: 'bookPrint',
                 name: 'bookPrint',
                 component: () => import(/* webpackChunkName: "bookPrint" */ '../views/bookPrint/list.vue'),

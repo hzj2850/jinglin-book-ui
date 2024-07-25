@@ -1,5 +1,5 @@
 <template>
     <div>
-        审核
+        审批
     </div>
 </template>

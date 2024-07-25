@@ -20,7 +20,7 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");
 
-import { getUserInfo, getBtns } from '@/api/index';
+import { getUserInfo, getBtns, getDepartmentList } from '@/api/index';
 
 export default {
     name: "app",
@@ -51,6 +51,7 @@ export default {
         this.$store.commit("SET_SPIN", "获取用户信息");
         await this.getUserInfo();
         await this.getbtns();
+        await this.getDepartmentList();
         // 关闭加载中
         this.$store.commit("SET_SPIN", false);
         this.pageShow = true;
@@ -75,6 +76,17 @@ export default {
                 if(res.code == 20000) {
                     const obj = res.data || {};
                     this.$store.commit('SET_BTNS', obj.buttonList || []);
+                } else {
+                    this.$message.destroy();
+                    this.$message.error(res.message);
+                }
+            })
+        },
+        // 获取鉴定中心列表
+        getDepartmentList() {
+            return getDepartmentList().then(res => {
+                if(res.code == 20000) {
+                    this.$store.commit('SET_JDZX', res.data || []);
                 } else {
                     this.$message.destroy();
                     this.$message.error(res.message);

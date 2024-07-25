@@ -198,6 +198,19 @@ export const columns = (_this) => {
     ];
 }
 
+export const getFormList = () => {
+    return [
+        { label: '打印情况', key: 'print', type: 'select', placeholder: '请选择打印情况', data: 'printList' },
+        { label: '制作时间', key: 'rangePicker', type: 'range', placeholder: '请选择制作时间' },
+        { label: '委托单位', key: 'entrustingParty', type: 'select', placeholder: '请选择委托单位', data: 'partyList' },
+        { label: '受理人', key: 'acceptor', type: 'select', placeholder: '请选择受理人', data: 'receiverList' },
+        { label: '检验人', key: 'surveyor', type: 'select', placeholder: '请选择检验人', data: 'surveyorList' },
+        { label: '制作人', key: 'producer', type: 'select', placeholder: '请选择制作人', data: 'userlist1' },
+        { label: '审核人', key: 'reviewedBy', type: 'select', placeholder: '请选择审核人', data: 'userlist2' },
+        { label: '审批人', key: 'approvedBy', type: 'select', placeholder: '请选择审批人', data: 'userlist3' },
+        { label: '签发人', key: 'issuer', type: 'select', placeholder: '请选择签发人', data: 'userlist4' },
+    ]
+}
 
 // 获取列表数据
 export const getList = (_this) => {

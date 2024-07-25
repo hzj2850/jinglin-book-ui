@@ -6,6 +6,8 @@
         @tab="onTab"
         :pagination="{ current: form.current, pageSize: form.size, total: total }"
         @size="onSize"
+        :form="form"
+        :formList="formList"
     >
         <ant-table
             :columns="columns"
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-import { columns, getTabs, getList } from './columns'
+import { columns, getTabs, getList, getFormList } from './columns'
 import AntTable from '@/components/ant-table/index.vue'
 import AntList from '@/components/ant-list/index.vue'
 export default {
@@ -59,9 +61,19 @@ export default {
         tabs() {
             return getTabs(this);
         },
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        formList() {
+            return getFormList(this);
+        },
     },
     mounted() {
-        this.onTab(this.tabs[0]);
+        this.form = {
+            ...this.form,
+            evaluationCenter: this.userInfo.appraisalOrganId,
+            specialty: this.userInfo.identifyMajorId
+        }
     },
     methods: {
         onBack() {
@@ -69,6 +81,7 @@ export default {
         },
         onTab(item) {
             this.form.state = item.value;
+            this.form.current = 1;
             this.getList();
         },
         onSize(v, s) {

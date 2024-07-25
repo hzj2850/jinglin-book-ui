@@ -10,6 +10,12 @@ export default new Vuex.Store({
         spinning: false, // 页面加载中
         buttonList: [], // 按钮列表
         btns: {}, // 按钮列表（方便查询）
+        jdzxList: [], // 鉴定中心列表
+        majorList: [], // 鉴定专业
+        partyList: [], // 委托单位
+        receiverList: [], // 受理人
+        surveyorList: [], // 检验人
+        operatorList: [], // 操作人
     },
     mutations: {
         // 用户信息
@@ -33,6 +39,30 @@ export default new Vuex.Store({
             }
             state.btns = o;
         },
+        // 鉴定中心
+        SET_JDZX(state, v) {
+            state.jdzxList = v;
+        },
+        // 鉴定专业
+        set_major(state, v) {
+            state.majorList.push(v);
+        },
+        // 委托单位
+        set_party(state, v) {
+            state.partyList.push(v);
+        },
+        // 受理人
+        set_receiver(state, v) {
+            state.receiverList.push(v);
+        },
+        // 检验人
+        set_surveyor(state, v) {
+            state.surveyorList.push(v);
+        },
+        // 操作人
+        set_operator(state, v) {
+            state.operatorList.push(v);
+        }
     },
     actions: {
     },
