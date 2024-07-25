@@ -2,6 +2,7 @@
     <layout-view :spinning="spinning">
         <template #header>
             <task-navs
+                :title="title"
                 :path="listPath"
                 :taskId="taskId"
                 :total="5"
@@ -37,6 +38,9 @@ export default {
         listPath: {
             type: String,
             default: ''
+        },
+        title: {
+            type: String
         },
     },
     data() {

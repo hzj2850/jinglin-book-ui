@@ -1,5 +1,8 @@
 <template>
-    <caseDetails listPath="exaList"/>
+    <caseDetails
+        title="文书审核任务列表"
+        listPath="exaList"
+    />
 </template>
 
 <script>

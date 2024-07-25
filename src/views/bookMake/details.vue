@@ -1,5 +1,8 @@
 <template>
-    <caseDetails listPath="makeList"/>
+    <caseDetails
+        title="文书待制作列表"
+        listPath="makeList"
+    />
 </template>
 
 <script>
