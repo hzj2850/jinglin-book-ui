@@ -29,9 +29,9 @@ import {
   // Breadcrumb,
   // Steps,
   Spin,
-  Menu,
+  // Menu,
   // Drawer,
-  // Tooltip,
+  Tooltip,
   // Alert,
   // Tag,
   // Divider,
@@ -88,9 +88,9 @@ const importAntd = Vue => {
   // Vue.use(Breadcrumb)
   // Vue.use(Steps)
   Vue.use(Spin)
-  Vue.use(Menu)
+  // Vue.use(Menu)
   // Vue.use(Drawer)
-  // Vue.use(Tooltip)
+  Vue.use(Tooltip)
   // Vue.use(Alert)
   // Vue.use(Tag)
   // Vue.use(Divider)

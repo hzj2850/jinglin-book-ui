@@ -36,7 +36,7 @@ export default {
     padding: 0 12px;
     min-width: 88px;
     text-align: center;
-    margin-left: 1px;
+    margin-left: 1PX;
     cursor: pointer;
     &:first-child {
       margin-left: 0;

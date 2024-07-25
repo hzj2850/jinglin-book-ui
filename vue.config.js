@@ -27,7 +27,7 @@ module.exports = {
     devServer: {
         open: true,
         host: getNetworkIp.networkIp,
-        port: 8006,
+        port: 9001,
         https: false,
         headers: {
             'Access-Control-Allow-Origin': '*'

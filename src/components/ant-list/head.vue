@@ -14,7 +14,17 @@
         </div>
         <div class="ant-screen-body" :style="{height: bodyHeight}">
             <div class="ant-screen-content" ref="body">
-                11111111111111
+                <div class="left">
+                    <div class="form-item" v-for="(item, index) in formList" :key="index">
+                        <label>{{ item.label }}：</label>
+                        <a-select size="large" v-if="item.type === 'select'" />
+                    </div>
+                </div>
+                <div class="right">
+                    <a-button size="large" type="danger" @click="onReset()">重置</a-button>
+                    <a-button size="large" type="primary" @click="onConsult(0)">精确查询</a-button>
+                    <a-button size="large" type="sussess" @click="onConsult(1)">模糊查询</a-button>
+                </div>
             </div>
         </div>
     </div>
@@ -26,7 +36,17 @@ export default {
         placeholder: {
             type: String,
             default: '输入案件名称 / 委托编号 / 鉴定编号 / 任务编号'
-        }
+        },
+        formList: {
+            type: Array,
+            default: () => ([
+                { label: '11111', key: 'jjjjj', type: 'select' },
+                { label: '11111', key: 'jjjjj', type: 'select' },
+                { label: '11111', key: 'jjjjj', type: 'select' },
+                { label: '11111', key: 'jjjjj', type: 'select' },
+                { label: '11111', key: 'jjjjj', type: 'select' },
+            ])
+        },
     },
     data() {
         return {
@@ -45,6 +65,14 @@ export default {
             } else {
                 this.bodyHeight = 0;
             }
+        },
+        // 重置
+        onReset() {
+
+        },
+        // 查询
+        onConsult() {
+
         },
     },
 }
@@ -84,5 +112,33 @@ export default {
 
 .ant-screen-content{
     padding-bottom: 12px;
+    display: flex;
+    > .left{
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        .form-item{
+            width: 30%;
+            display: flex;
+            align-items: center;
+            > label{
+                min-width: 4em;
+                text-align: right;
+            }
+            .ant-select{
+                flex: 1;
+            }
+        }
+    }
+    > .right{
+        width: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .ant-btn{
+            margin: 10px;
+        }
+    }
 }
 </style>

@@ -40,8 +40,10 @@ export default {
         },
         tipText() {
             const v = this.$store.state.spinning;
-            if(v == 'true') return '加载中';
-            return v || '';
+            if(v == true) return '加载中';
+            if(v == false) return '加载中';
+            if(!v) return '加载中';
+            return v + '';
         },
     },
     async created() {
@@ -71,7 +73,8 @@ export default {
             const code = this.$store.state.props.sys_code;
             return getBtns({uid, code}).then(res => {
                 if(res.code == 20000) {
-                    this.$store.commit('SET_BTNS', res.data.buttonList || []);
+                    const obj = res.data || {};
+                    this.$store.commit('SET_BTNS', obj.buttonList || []);
                 } else {
                     this.$message.destroy();
                     this.$message.error(res.message);

@@ -5,7 +5,7 @@
         <div class="ant-list-body">
             <slot></slot>
         </div>
-        <paginationCom/>
+        <paginationCom :pagination="pagination" @change="onSize" />
         <div class="ant-list-footer" v-if="$scopedSlots['footer']">
             <slot name="footer"></slot>
         </div>
@@ -33,6 +33,10 @@ export default {
         tabId: {
             type: [String, Number]
         },
+        pagination: {
+            type: Object,
+            default: () => ({})
+        },
     },
     watch: {
         spinning(v) {
@@ -42,6 +46,9 @@ export default {
     methods: {
         onTabs(item) {
             this.$emit('tab', item);
+        },
+        onSize(v, s) {
+            this.$emit('size', v, s);
         },
     }
 }

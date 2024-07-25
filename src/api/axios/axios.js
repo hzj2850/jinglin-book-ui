@@ -42,8 +42,8 @@ Axios.interceptors.response.use(
     res => {
         if (res.status === 200) {
             // 解密
-            if (res.headers.encrypt == 'true') {
-                const data = res.data.data || '';
+            const data = res.data.data || '';
+            if (res.headers.encrypt == 'true' && data) {
                 if (data.includes(encryptDecryptPrefix)) {
                     res.data.data = JSON.parse(SM4Decrypt(data.substring(encryptDecryptPrefix.length)));
                 } else {
