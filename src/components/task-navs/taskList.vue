@@ -2,7 +2,7 @@
     <div class="task-list">
         <i class="iconfont icon-dual-left" :hase="lShow" @click="onPrev()"></i>
         <!-- 轮播图 -->
-        <div class="swiper-container">
+        <div class="swiper-container" ref="sw">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item, index) in tasks" :key="index">
                     <task-item :item="item" :index="index + 1" :taskId="taskId" @click="onTask(item, index)" />
@@ -37,15 +37,6 @@ export default {
             rShow: true,
         };
     },
-    mounted() {
-        this.mySwiper = new Swiper('.swiper-container',{
-            slidesPerView: 'auto',
-            paginationClickable: true,
-            onSwiperCreated: this.getIndex,
-            onSlideChangeEnd: this.getIndex,
-            onTouchEnd: this.getIndex,
-        });
-    },
     methods: {
         onTask(item, index) {
             this.mySwiper.swipeTo(index - 1, 500, true);
@@ -61,17 +52,41 @@ export default {
             this.lShow = e.activeIndex !== 0;
             this.rShow = e.activeIndex !== e.slides.length - e.visibleSlides.length;
         },
+        // 轮播初始化
+        inIt() {
+            this.mySwiper && this.mySwiper.destroy(true);
+            this.$nextTick(() => {
+                this.mySwiper = new Swiper(this.$refs.sw, {
+                    slidesPerView: 'auto',
+                    paginationClickable: true,
+                    onSwiperCreated: this.getIndex,
+                    onSlideChangeEnd: this.getIndex,
+                    onTouchEnd: this.getIndex,
+                });
+                this.setIndex();
+            });
+        },
+        // 跳转到对应位置
+        setIndex() {
+            if(this.taskId && this.mySwiper) {
+                const idx = this.tasks.findIndex(f => f.value === this.taskId);
+                if(idx >= 0) this.mySwiper.swipeTo(idx - 1, 300, true);
+            }
+        },
     },
     watch: {
         taskId: {
             immediate: true,
             handler(v) {
-                if(v) this.$nextTick(() => {
-                    const idx = this.tasks.findIndex(f => f.value === this.taskId);
-                    if(idx > 0) this.mySwiper.swipeTo(idx - 1, 500, true);
-                });
+                if(v) this.setIndex();
             }
-        }
+        },
+        'tasks.length': {
+            immediate: true,
+            handler(v) {
+                if(v) this.inIt();
+            }
+        },
     },
 }
 </script>
