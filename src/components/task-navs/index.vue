@@ -1,7 +1,7 @@
 <template>
     <div class="task-navs">
         <div class="task-title">{{ title }}</div>
-        <task-list :tasks="tasks" :taskId="taskId" @change="onTask" />
+        <task-list :tasks="tasks" :taskId="taskId" @change="onTask" v-if="tasks.length > 0" />
         <a-button size="large" @click="onTaskList" v-if="total * 1 > 0">进入全部任务列表（{{ total }}）</a-button>
     </div>
 </template>

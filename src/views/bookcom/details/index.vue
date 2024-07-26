@@ -4,8 +4,9 @@
             <task-navs
                 :title="title"
                 :path="listPath"
+                :tasks="tasks"
                 :taskId="taskId"
-                :total="5"
+                :total="total"
                 @change="onTask"
             />
         </template>
@@ -13,19 +14,20 @@
             <!-- 导航切换 -->
             <ant-btns :tabs="tabs" :tabId="tabId" @change="onTabs" />
             <!-- 资料列表 -->
-            <data-list v-if="tabId == 1" />
+            <data-list :taskId="taskId" v-if="tabId == 1" />
             <!-- 案件信息 -->
-            <case-info v-if="tabId == 2" />
+            <case-info :taskId="taskId" v-if="tabId == 2" />
         </template>
     </layout-view>
 </template>
 
 <script>
-import DataList from './data-list/index.vue'
-import caseInfo from './case-info/index.vue'
+import DataList from '../data-list/index.vue'
+import caseInfo from '../case-info/index.vue'
 import LayoutView from '@/components/ant-layout/layout-view.vue'
 import AntBtns from '@/components/ant-form/ant-btns.vue'
 import TaskNavs from '@/components/task-navs/index.vue'
+import { getTasks, setTask } from './fn'
 export default {
     components: {
         DataList,
@@ -46,7 +48,8 @@ export default {
     data() {
         return {
             spinning: false, // 加载中
-            taskId: '2', // 选中的任务
+            tasks: [], // 任务列表
+            total: 0, // 任务总数
             tabId: '2', // 选中的导航
             tabs: [
                 { label: "资料列表", value: "1" },
@@ -54,9 +57,22 @@ export default {
             ],
         };
     },
+    computed: {
+        taskId() {
+            return this.$route.query.taskId;
+        },
+    },
+    async created() {
+        // 获取任务列表
+        await getTasks(this);
+        // 默认选中一个任务
+        await setTask(this);
+    },
     methods: {
         onTask(item) {
-            this.taskId = item.value;
+            this.$router.replace({
+                query: { ...this.$route.query, taskId: item.value }
+            });
         },
         onTabs(item) {
             this.tabId = item.value;

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import caseDetails from '../case-details.vue';
+import caseDetails from '../bookcom/details/index.vue';
 export default {
     components: {
         caseDetails

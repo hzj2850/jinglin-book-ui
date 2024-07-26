@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { caseInfo } from './info'
+import { caseInfo } from './columns'
 export default {
     computed: {
         caseInfo() {

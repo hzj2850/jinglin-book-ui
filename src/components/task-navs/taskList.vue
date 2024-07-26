@@ -61,7 +61,18 @@ export default {
             this.lShow = e.activeIndex !== 0;
             this.rShow = e.activeIndex !== e.slides.length - e.visibleSlides.length;
         },
-    }
+    },
+    watch: {
+        taskId: {
+            immediate: true,
+            handler(v) {
+                if(v) this.$nextTick(() => {
+                    const idx = this.tasks.findIndex(f => f.value === this.taskId);
+                    if(idx > 0) this.mySwiper.swipeTo(idx - 1, 500, true);
+                });
+            }
+        }
+    },
 }
 </script>
 

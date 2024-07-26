@@ -4,7 +4,7 @@
         <ant-btns :tabs="tabs" :tabId="tabId" @change="onTabs" />
         <ant-table
             :columns="columns"
-            :listdata="listData"
+            :listdata="listdata"
             :select-row-keys="openKeys"
             row-key="id"
         >
@@ -16,11 +16,18 @@
                 {{ e }}
             </template>
         </ant-table>
+        <div class="right-table-foot">
+            <a-button size="large" type="primary">文书制作</a-button>
+            <a-button size="large" type="primary">重新制作</a-button>
+            <a-button size="large" type="primary">文书比较</a-button>
+            <a-button size="large" type="primary">查看审批稿子</a-button>
+            <a-button size="large" type="primary">文书下载</a-button>
+        </div>
     </div>
 </template>
 
 <script>
-import { columns1, columns2, columns3, listData } from './columns'
+import { columns1, columns2, columns3 } from './columns'
 import AntBtns from '@/components/ant-form/ant-btns.vue'
 import AntTable from '@/components/ant-table/index.vue'
 export default {
@@ -30,7 +37,7 @@ export default {
     },
     data() {
         return {
-            listData,
+            listdata: [],
             openKeys: [],
             tabId: '1', // 选中的导航
             tabs: [
@@ -67,5 +74,15 @@ export default {
 .ant-table{
     flex: 1;
     margin-top: 2px;
+}
+
+.right-table-foot{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 10px;
+    .ant-btn{
+        margin-left: 12px;
+    }
 }
 </style>
