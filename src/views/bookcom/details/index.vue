@@ -59,10 +59,15 @@ export default {
     },
     computed: {
         taskId() {
-            return this.$route.query.taskId;
+            const v = this.$route.query.taskId;
+            const obj = this.tasks.find(f => f.value == v);
+            if(obj) return v;
+            return '';
         },
     },
     async created() {
+        // 开启加载动画
+        this.$loading(true);
         // 获取任务列表
         await getTasks(this);
         // 默认选中一个任务

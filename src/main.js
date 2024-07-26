@@ -21,6 +21,11 @@ Vue.use(VLazy);
 Vue.config.productionTip = false
 
 function render() {
+  // 调用APP中的加载动画
+  Vue.prototype.$loading = (v) => {
+    store.commit("SET_SPIN", v);
+  }
+
   new Vue({
     router,
     store,
