@@ -53,20 +53,26 @@ export const columns2 = (_this) => {
         {
             title: '鉴定材料',
             key: 'name',
-            style: 'min-width: 12em;',
+            style: 'width: 12em;',
+            ellipsis: 10,
         },
         {
             title: '页数',
             key: 'age',
+            slot: 'page',
+            style: 'width: 10em;',
         },
         {
             title: '起止页码',
             key: 'sex',
+            slot: 'page2',
+            style: 'width: 10em;',
         },
         {
             title: '文档类型',
             key: 'age',
             style: 'width: 12em;',
+            ellipsis: 10,
         },
         {
             title: '生成/上传时间',
@@ -76,6 +82,7 @@ export const columns2 = (_this) => {
         {
             title: '操作',
             key: 'age',
+            slot: 'action',
             style: 'width: 10em;',
         },
     ];
@@ -96,15 +103,19 @@ export const columns3 = (_this) => {
         {
             title: '操作人',
             key: 'name',
-            style: 'min-width: 12em;',
+            style: 'width: 12em;',
+            ellipsis: 10,
         },
         {
             title: '操作状态',
             key: 'age',
+            style: 'width: 12em;',
+            ellipsis: 10,
         },
         {
             title: '操作时间',
             key: 'sex',
+            style: 'width: 12em;',
         },
         {
             title: '操作模块',
@@ -231,6 +242,7 @@ export const getList = (_this) => {
     getApi().then(res => {
         if (res.code == 20000) {
             _this.$loading(false);
+            _this.listdata.push({ name: 'jjjjj' })
             console.log("获取列表", _this.tabId);
         } else {
             _this.$message.destroy();

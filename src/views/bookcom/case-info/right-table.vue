@@ -8,21 +8,39 @@
             :select-row-keys="selectRowKeys"
             row-key="id"
         >
+            <!-- 页数 -->
+            <template #page>
+                <a-input placeholder="请输入页码" />
+            </template>
+            <!-- 起止页码 -->
+            <template #page2>
+                <a-input placeholder="请输入页码" />
+            </template>
+            <!-- 操作 -->
             <a slot="action" @click="onSe(item)" slot-scope="{item,index}">
                 查看{{ index }}
             </a>
-            <template #expand="e">
-                <p>下拉展开内容</p>
-                {{ e }}
-            </template>
         </ant-table>
-        <div class="right-table-foot">
-            <a-button size="large" type="primary" @click="onAdd">文书制作</a-button>
-            <a-button size="large" type="primary">重新制作</a-button>
+        <!-- 检材/样本列表 -->
+        <div class="right-table-foot" v-if="tabId == 1">
+            <a-button size="large" type="primary" @click="onMake()">文书制作</a-button>
+            <a-button size="large" type="primary" @click="onRemake()">重新制作</a-button>
             <a-button size="large" type="primary">文书比较</a-button>
             <a-button size="large" type="primary">查看审批稿子</a-button>
             <a-button size="large" type="primary">文书下载</a-button>
         </div>
+        <!-- 鉴定材料列表 -->
+        <div class="right-table-foot" v-if="tabId == 2">
+            <a-button size="large" type="primary">打印</a-button>
+            <a-button size="large" type="primary">上传</a-button>
+            <a-button size="large" type="primary">下载</a-button>
+        </div>
+
+        <!-- 文书制作弹框 -->
+        <modal-make ref="make" />
+        <modal-make2 ref="make2" />
+        <!-- 二次确认提示弹框 -->
+        <modal-confirm ref="confirm" />
     </div>
 </template>
 
@@ -30,10 +48,16 @@
 import { columns1, columns2, columns3, getList } from './columns'
 import AntBtns from '@/components/ant-form/ant-btns.vue'
 import AntTable from '@/components/ant-table/index.vue'
+import modalMake from './modal-make/idnex.vue'
+import modalMake2 from './modal-make/index2.vue'
+import modalConfirm from '@/components/ant-form/modal-confirm.vue'
 export default {
     components: {
         AntBtns,
-        AntTable
+        AntTable,
+        modalMake,
+        modalMake2,
+        modalConfirm,
     },
     data() {
         return {
@@ -79,6 +103,15 @@ export default {
             this.tabId = item.value;
             return getList(this);
         },
+        onMake() {
+            this.$refs.make.open();
+        },
+        onRemake() {
+            this.$refs.confirm.text = `确定重新制作？\n之前制作的文书将形成记录且不可修改！`;
+            this.$refs.confirm.open(() => {
+                this.$refs.make2.open();
+            });
+        },
         onAdd() {
             this.listdata.push({name: 'hzj', age: this.listdata.length})
         },
@@ -91,6 +124,12 @@ export default {
 .right-table{
     display: flex;
     flex-direction: column;
+
+    .ant-input{
+        width: calc(100% - 12px);
+        font-size: @font-size-base;
+        text-align: center;
+    }
 }
 
 .ant-table{

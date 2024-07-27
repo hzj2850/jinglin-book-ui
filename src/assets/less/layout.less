@@ -9,7 +9,6 @@
 
 @primary-color: #1890ff; // 全局主色
 @link-color: #1890ff; // 链接色
-@error-color: #f5222d; // 错误色
 
 @heading-color: rgba(0, 0, 0, 0.85); // 标题色
 @text-color-secondary: rgba(0, 0, 0, 0.45); // 次文本色
@@ -21,12 +20,14 @@
 @header-color: #fff;
 @footer-color: #fff;
 @label-color: #999;
+@error-color: #f5222d; // 错误色
 
-@font-size-title: 17px; // 标题
+@font-size-title: 18px; // 标题
 @font-size-base: 16px; // 主字号
 @input-height: 40px; // 表单元素高度
 @head-height: 60px; // 头部高度
 @foot-height: 48px; // 底部高度
+@form-item-mt: 16px;
 
 // 隐藏滚动条方法封装2
 .hidScrollBar() {
@@ -53,4 +54,44 @@
 // 按钮
 .ant-btn-lg {
     min-width: 88px;
+}
+
+
+// 表单样式
+.my-form-model{
+    .ant-form-item{
+        display: flex;
+        align-items: flex-start;
+        margin: 0;
+        &::before,&::after{
+            display: none;
+        }
+        /deep/ .ant-form-item-label{
+            font-size: @font-size-base;
+            > label{font-size: inherit;}
+        }
+        /deep/ .ant-form-item-control-wrapper{
+            flex: 1;
+        }
+        /deep/ .ant-form-explain{
+            display: none;
+        }
+    }
+}
+
+// 弹框样式
+.my-modal{
+    /deep/ .ant-modal-title{
+        font-size: @font-size-title;
+        font-weight: bold;
+    }
+    /deep/ .ant-modal-close-x{
+        font-size: @font-size-title;
+    }
+    /deep/ .ant-modal-footer{
+        padding: 10px 16px;
+        .ant-btn-lg{
+            margin-left: 12px;
+        }
+    }
 }
