@@ -88,8 +88,10 @@ export default {
         onTabs(item) {
             this.tabId = item.value;
             // 触发组件生命周期
-            const ref = this.$refs.tabCentent;
-            if(ref) ref.Init();
+            this.$nextTick(() => {
+                const ref = this.$refs.tabCentent;
+                if(ref) ref.Init();
+            });
         },
     },
 }

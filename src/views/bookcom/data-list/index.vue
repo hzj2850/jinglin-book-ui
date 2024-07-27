@@ -13,7 +13,7 @@ export default {
     components: { leftTree },
     methods: {
         Init() {
-            console.log('页面数据回信');
+            console.log('获取文件');
         },
     }
 }
