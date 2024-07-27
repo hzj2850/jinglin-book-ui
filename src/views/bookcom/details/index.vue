@@ -14,9 +14,9 @@
             <!-- 导航切换 -->
             <ant-btns :tabs="tabs" :tabId="tabId" @change="onTabs" />
             <!-- 资料列表 -->
-            <data-list :taskId="taskId" v-if="tabId == 1" />
+            <data-list ref="tabCentent" v-if="tabId == 1" />
             <!-- 案件信息 -->
-            <case-info :taskId="taskId" v-if="tabId == 2" />
+            <case-info ref="tabCentent" v-if="tabId == 2" />
         </template>
     </layout-view>
 </template>
@@ -27,7 +27,7 @@ import caseInfo from '../case-info/index.vue'
 import LayoutView from '@/components/ant-layout/layout-view.vue'
 import AntBtns from '@/components/ant-form/ant-btns.vue'
 import TaskNavs from '@/components/task-navs/index.vue'
-import { getTasks, setTask } from './fn'
+import { getTasks, getTask, setTask } from './fn'
 export default {
     components: {
         DataList,
@@ -59,28 +59,37 @@ export default {
     },
     computed: {
         taskId() {
-            const v = this.$route.query.taskId;
+            const v = this.$route.query.id;
             const obj = this.tasks.find(f => f.value == v);
             if(obj) return v;
             return '';
         },
     },
-    async created() {
-        // 开启加载动画
+    async activated() {
+        console.log('进入详情');
+        // 1、开启加载动画
         this.$loading(true);
-        // 获取任务列表
-        await getTasks(this);
-        // 默认选中一个任务
-        await setTask(this);
+        // 2、获取任务列表
+        const obj = await getTasks(this);
+        // 3、默认选中任务
+        await setTask(this, obj);
     },
     methods: {
         onTask(item) {
-            this.$router.replace({
-                query: { ...this.$route.query, taskId: item.value }
-            });
+            if(item.value != this.$route.query.id) {
+                this.$router.replace({
+                    query: { ...this.$route.query, id: item.value }
+                });
+            }
+            // 触发组件生命周期
+            const ref = this.$refs.tabCentent;
+            if(ref) ref.Init();
         },
         onTabs(item) {
             this.tabId = item.value;
+            // 触发组件生命周期
+            const ref = this.$refs.tabCentent;
+            if(ref) ref.Init();
         },
     },
 }

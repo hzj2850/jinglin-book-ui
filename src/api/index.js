@@ -1,5 +1,7 @@
 import axios from './axios/index';
 
+// 模拟接口
+export const getApi = () => new Promise((resolve) => { setTimeout(() => resolve({ code: 20000 }), 300) });
 // 获取当前登录用户信息
 export const getUserInfo = (v) => axios.get('/system/user/getUserInformation', v);
 // 获取项目配置的按钮信息

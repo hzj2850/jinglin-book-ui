@@ -11,14 +11,10 @@
 import leftTree from './left-tree.vue';
 export default {
     components: { leftTree },
-    props: ['taskId'],
-    watch: {
-        taskId: {
-            immediate: true,
-            handler(v) {
-                if(v) console.log('任务id', v);
-            }
-        }
+    methods: {
+        Init() {
+            console.log('页面数据回信');
+        },
     }
 }
 </script>

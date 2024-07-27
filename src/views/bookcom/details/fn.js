@@ -1,42 +1,74 @@
+import { getApi } from '@/api/index'
+
 // 获取头部【任务列表】
 export const getTasks = (_this) => {
-    _this.total = 222;
-    _this.tasks = [
-        { label: 'G520100-40-22000', value: 'a1' },
-        { label: 'J520100-40-22002', value: 'b2' },
-        { label: 'G520100-40-22003', value: 'c3' },
-        { label: 'J520100-40-22004', value: 'd4' },
-    ]
-}
-
-// 获取【任务详情】
-export const getTaskDetails = (_this) => {
-    console.log("1111111111111")
     return new Promise((resolve) => {
-        //在回调函数中启动异步任务
-        setTimeout(() => {
-            _this.tasks.push({ label: '何志军20100-40-22004', value: 'd5' },)
-            console.log("JJJJJJJJJJJJJJJJJJJJ22222222222222222222222222")
-            resolve();
-        }, 2000)
+        getApi().then(res => {
+            if (res.code == 20000) {
+                const list = [
+                    { label: 'G520100-40-22000', value: 'a1' },
+                    { label: 'J520100-40-22002', value: 'b2' },
+                    { label: 'G520100-40-22003', value: 'c3' },
+                    { label: 'J520100-40-22004', value: 'd4' },
+                ];
+                const total = 254;
+                resolve({ total, list });
+            } else {
+                _this.$message.destroy();
+                _this.$message.error(res.message || '获取任务列表失败');
+                resolve({ total: 0, list: [] });
+            }
+        })
     })
 }
 
+// 获取【任务详情】
+export const getTask = (_this) => {
+    return getApi().then(res => {
+        if (res.code == 20000) {
+            const list = [
+                { label: 'G520100-40-22000', value: 'a1' },
+                { label: 'J520100-40-22002', value: 'b2' },
+                { label: 'G520100-40-22003', value: 'c3' },
+                { label: 'J520100-40-22004', value: 'd4' },
+            ];
+            const total = 254;
+            resolve({ total, list });
+        } else {
+            _this.$message.destroy();
+            _this.$message.error(res.message || '获取任务列表失败');
+        }
+    })
 
-// 刚进入页面时，选中第一个任务
-export const setTask = (_this) => {
-    const query = _this.$route.query;
-    const taskId = query.taskId;
-    const list = _this.tasks || [];
-    // 默认查看第一个任务
-    if (!taskId) {
-        const task1 = list[0];
-        if (task1) _this.onTask(task1);
+}
+
+
+// 默认选中任务
+export const setTask = (that, params = {}) => {
+    const list = params.list || [];
+    const total = params.total || 0;
+    const id = that.$route.query.id;
+    // 1、默认选中第一个任务
+    if (!id && list[0]) {
+        that.tasks = list;
+        that.total = total;
+        that.onTask(list[0]);
+        return false;
     }
-    // 查看记录
-    if (taskId) {
-        const task2 = list.find(f => f.value == taskId);
-        if (task2) _this.onTask(task2);
-        else return getTaskDetails(_this);
+    // 2、任务回显
+    const item = list.find(f => f.value == id);
+    if (item) {
+        that.tasks = list;
+        that.total = total;
+        that.onTask(item);
+        return false;
+    }
+    // 3、记录回显
+    if (!item) {
+        const obj = { label: '何志军', value: 'hzj' };
+        that.tasks = [obj, ...list];
+        that.total = total;
+        that.onTask(obj);
+        return false;
     }
 }

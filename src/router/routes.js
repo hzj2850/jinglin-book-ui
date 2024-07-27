@@ -20,7 +20,7 @@ const routes = [
                 path: 'makeDetails',
                 name: 'makeDetails',
                 component: () => import(/* webpackChunkName: "makeDetails" */ '../views/bookMake/details.vue'),
-                meta: { title: '文书制作', keepAlive: false }
+                meta: { title: '文书制作', keepAlive: true }
             },
             {
                 path: 'exaList',
@@ -32,13 +32,7 @@ const routes = [
                 path: 'exaDetails',
                 name: 'exaDetails',
                 component: () => import(/* webpackChunkName: "exaDetails" */ '../views/bookExa/details.vue'),
-                meta: { title: '文书审核', keepAlive: false }
-            },
-            {
-                path: 'appDetails',
-                name: 'appDetails',
-                component: () => import(/* webpackChunkName: "appDetails" */ '../views/bookApp/details.vue'),
-                meta: { title: '文书审批', keepAlive: false }
+                meta: { title: '文书审核', keepAlive: true }
             },
             {
                 path: 'appList',
@@ -47,16 +41,22 @@ const routes = [
                 meta: { title: '文书审批', keepAlive: false }
             },
             {
-                path: 'IssDetails',
-                name: 'IssDetails',
-                component: () => import(/* webpackChunkName: "IssDetails" */ '../views/bookIss/details.vue'),
-                meta: { title: '文书签发', keepAlive: false }
+                path: 'appDetails',
+                name: 'appDetails',
+                component: () => import(/* webpackChunkName: "appDetails" */ '../views/bookApp/details.vue'),
+                meta: { title: '文书审批', keepAlive: true }
             },
             {
                 path: 'IssList',
                 name: 'IssList',
                 component: () => import(/* webpackChunkName: "IssList" */ '../views/bookIss/list.vue'),
                 meta: { title: '文书签发', keepAlive: false }
+            },
+            {
+                path: 'IssDetails',
+                name: 'IssDetails',
+                component: () => import(/* webpackChunkName: "IssDetails" */ '../views/bookIss/details.vue'),
+                meta: { title: '文书签发', keepAlive: true }
             },
             {
                 path: 'bookPrint',

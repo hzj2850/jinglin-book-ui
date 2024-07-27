@@ -1,7 +1,7 @@
 <template>
     <div class="case-info">
         <left-info />
-        <right-table/>
+        <right-table ref="table" />
     </div>
 </template>
 
@@ -10,14 +10,10 @@ import leftInfo from './left-info.vue'
 import RightTable from './right-table.vue'
 export default {
     components: { leftInfo, RightTable },
-    props: ['taskId'],
-    watch: {
-        taskId: {
-            immediate: true,
-            handler(v) {
-                if(v) console.log('任务id', v);
-            }
-        }
+    methods: {
+        Init() {
+            this.$refs.table.Init();
+        },
     }
 }
 </script>

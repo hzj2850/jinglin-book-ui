@@ -1,3 +1,4 @@
+import { getApi } from '@/api/index'
 
 // 检材/样本列表
 export const columns1 = (_this) => {
@@ -222,4 +223,19 @@ export const caseInfo = () => {
         { title: '委托信息', data: info2() },
         { title: '文书经办人', data: info3() },
     ]
+}
+
+// 检材/样本列表
+export const getList = (_this) => {
+    _this.$loading(true);
+    getApi().then(res => {
+        if (res.code == 20000) {
+            _this.$loading(false);
+            console.log("获取列表", _this.tabId);
+        } else {
+            _this.$message.destroy();
+            _this.$message.error(res.message || '获取【检材/样本列表】失败');
+        }
+    })
+
 }
