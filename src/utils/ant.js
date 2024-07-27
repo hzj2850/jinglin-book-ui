@@ -58,7 +58,7 @@ import {
   // Anchor,
   // Carousel,
   // BackTop,
-  // Empty
+  Empty
 } from 'ant-design-vue'
 
 const importAntd = Vue => {
@@ -115,7 +115,7 @@ const importAntd = Vue => {
   // Vue.use(Anchor)
   // Vue.use(Carousel)
   // Vue.use(BackTop)
-  // Vue.use(Empty)
+  Vue.use(Empty)
   Vue.prototype.$message = message
   Vue.prototype.$Message = message
   // Vue.prototype.$notification = notification

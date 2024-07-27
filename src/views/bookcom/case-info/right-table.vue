@@ -96,6 +96,7 @@ export default {
 .ant-table{
     flex: 1;
     margin-top: 2px;
+    overflow: hidden;
 }
 
 .right-table-foot{

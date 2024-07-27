@@ -1,8 +1,9 @@
 @import url('./icon/iconfont.css');
-@ant-table-border-color: #f0f0f0;
+@ant-table-border-color: #ccc;
 @ant-table-header-color: #fafafa;
 @ant-table-hover-color: #fafafa;
 @ant-table-tr-height: 48px;
+@ant-table-font-size: 16px;
 
 
 .ant-table {
@@ -13,19 +14,6 @@
 
     table {
         width: 100%;
-        background-color: #fff;
-    }
-
-    th,
-    td {
-        text-align: center;
-        height: @ant-table-tr-height;
-        font-size: 16px;
-        box-shadow: 1px -1px 0 @ant-table-border-color inset;
-    }
-
-    th {
-        background-color: @ant-table-header-color;
     }
 
     thead {
@@ -34,33 +22,36 @@
         left: 0;
         top: 0;
         z-index: 500;
+
+        th{
+            height: @ant-table-tr-height;
+            font-size: @ant-table-font-size;
+            text-align: center;
+            box-shadow: 1px -1px 0 @ant-table-border-color inset;
+            &:first-child{
+                box-shadow: 0px -1px 0 @ant-table-border-color inset;
+            }
+        }
     }
 
     tbody {
-        >tr {
-            &:last-child {
-                td {
+        td{
+            height: @ant-table-tr-height;
+            font-size: @ant-table-font-size;
+            text-align: center;
+            box-shadow: 1px -1px 0 @ant-table-border-color inset;
+            &:first-child{
+                box-shadow: 0px -1px 0 @ant-table-border-color inset;
+            }
+        }
+        tr{
+            &:last-child{
+                td{
                     box-shadow: 1px 0 0 @ant-table-border-color inset;
+                    &:first-child{
+                        box-shadow: none;
+                    }
                 }
-
-                .fixed-last {
-                    box-shadow: -1px 0 0 @ant-table-border-color inset !important;
-                }
-
-                .fixed-last+td {
-                    box-shadow: none !important;
-                }
-            }
-
-            &:hover {
-                td {
-                    background-color: @ant-table-hover-color;
-                }
-            }
-
-            td {
-                height: @ant-table-tr-height;
-                position: relative;
             }
         }
     }
@@ -79,35 +70,24 @@
         width: 0 !important;
         height: 0 !important;
     }
+
+    .nodata{
+        display: none;
+    }
 }
 
-
-.td-fixed {
-    position: sticky;
-    background-color: #fff;
-}
-
-.fixed-last {
-    box-shadow: -1px -1px 0 @ant-table-border-color inset !important;
-}
-
-.fixed-last+td,
-.fixed-last+th {
-    box-shadow: 0 -1px 0 @ant-table-border-color inset !important;
-}
-
-
-
-// 展开
-.exIcon {
-    display: inline-block;
-    user-select: none;
-    cursor: pointer;
-    transition: all 200ms linear;
-}
-
-.exIconOpen {
-    transform: rotate(-180deg);
+// 没数据时
+.ant-table-nodata{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .nodata{
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 // 多选框

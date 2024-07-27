@@ -1,12 +1,15 @@
 <template>
     <div class="ant-table">
-        <div class="ant-table-body">
+        <div :class="['ant-table-body', {'ant-table-nodata': listdata.length === 0}]">
             <table>
                 <thead>
                     <table-head />
                 </thead>
                 <tbody-com :rowKey="rowKey" :selectRowKeys="selectRowKeys" />
             </table>
+            <div class="nodata">
+                <a-empty />
+            </div>
         </div>
     </div>
 </template>
