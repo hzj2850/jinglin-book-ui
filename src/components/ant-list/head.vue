@@ -166,7 +166,7 @@ export default {
         onSearch(v) {
             const str = (v || '').trim();
             this.$set(this.form, 'keyword', str);
-            this.$emit('change', this.form);
+            this.onConsult(1);
         },
         // 高级筛选按钮
         onShow() {
@@ -190,7 +190,7 @@ export default {
         // 鉴定专业
         onZy(v) {
             this.$set(this.form, 'specialty', v);
-            this.$emit('change', this.form);
+            this.onConsult(1);
             // 委托单位
             if(this.partyList.length === 0) getPartyList(v, this);
             // 受理人
