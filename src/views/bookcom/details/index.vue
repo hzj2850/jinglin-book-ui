@@ -17,6 +17,8 @@
             <data-list ref="tabCentent" v-if="tabId == 1" />
             <!-- 案件信息 -->
             <case-info ref="tabCentent" v-if="tabId == 2" />
+            <!-- 质量控制 -->
+            <quality-control ref="tabCentent" v-if="tabId == 3" />
         </template>
     </layout-view>
 </template>
@@ -24,6 +26,7 @@
 <script>
 import DataList from '../data-list/index.vue'
 import caseInfo from '../case-info/index.vue'
+import qualityControl from '../quality-control/index.vue'
 import LayoutView from '@/components/ant-layout/layout-view.vue'
 import AntBtns from '@/components/ant-form/ant-btns.vue'
 import TaskNavs from '@/components/task-navs/index.vue'
@@ -35,6 +38,7 @@ export default {
         AntBtns,
         TaskNavs,
         LayoutView,
+        qualityControl,
     },
     props: {
         listPath: {
@@ -103,6 +107,9 @@ export default {
     /deep/ .layout-view-main{
         display: flex;
         flex-direction: column;
+    }
+    /deep/ .ant-btns{
+        margin-bottom: 0;
     }
 }
 

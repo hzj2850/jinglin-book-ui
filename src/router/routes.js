@@ -2,13 +2,13 @@ import Layout from '../views/layout.vue'
 const routes = [
     {
         path: '/',
-        redirect: '/book/makeList',
+        redirect: '/book/bookMake/details',
     },
     {
         path: '/book',
         name: 'book',
         component: Layout,
-        redirect: '/book/makeList',
+        redirect: '/book/bookMake/details',
         children: [
             {
                 path: 'bookMake/list',
