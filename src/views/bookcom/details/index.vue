@@ -54,6 +54,7 @@ export default {
             tabs: [
                 { label: "资料列表", value: "1" },
                 { label: "案件信息", value: "2" },
+                { label: "质量控制", value: "3" },
             ],
         };
     },

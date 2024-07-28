@@ -5,7 +5,7 @@
         <div class="ant-list-body">
             <slot></slot>
         </div>
-        <paginationCom :pagination="pagination" @change="onSize" />
+        <paginationCom :pagination="pagination" v-if="pagination.pageSize" @change="onSize" />
         <div class="ant-list-footer" v-if="$scopedSlots['footer']">
             <slot name="footer"></slot>
         </div>
