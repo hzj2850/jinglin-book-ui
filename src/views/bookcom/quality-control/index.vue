@@ -9,7 +9,12 @@ import InfoItem from './item.vue'
 export default {
     components: {
         InfoItem
-    }
+    },
+    methods: {
+        Init() {
+            console.log('获取质量控制列表数据')
+        },
+    },
 }
 </script>
 
