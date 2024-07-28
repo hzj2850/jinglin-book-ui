@@ -1,5 +1,6 @@
 <template>
     <div class="ant-screen">
+        <!-- 列表头部搜索 -->
         <div class="ant-screen-header">
             <a-input-search allowClear size="large" :placeholder="placeholder" enter-button @search="onSearch" />
             <a-button size="large" type="primary" @click="onShow">高级筛选</a-button>
@@ -29,6 +30,7 @@
                 />
             </template>
         </div>
+        <!-- 高级筛选 -->
         <div class="ant-screen-body" :style="{height: bodyHeight}">
             <div class="ant-screen-content" ref="body">
                 <div class="left">
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import { getMajor, getPartyList, getReceiver, getSurveyor, getOperator } from './get'
+import { getMajor, getPartyList, getReceiver, getSurveyor, getOperator, getCfig, getPrint } from './get'
 import moment from 'moment'
 export default {
     props: {
@@ -75,11 +77,7 @@ export default {
         },
         formList: {
             type: Array,
-            default: () => ([
-                { label: '打印情况', key: 'jjjjj', type: 'select' },
-                { label: '制作时间', key: 'jjjjj', type: 'select' },
-                { label: '委托单位', key: 'jjjjj', type: 'select' },
-            ])
+            default: () => getCfig(),
         },
         form: {
             type: Object,
@@ -92,6 +90,7 @@ export default {
         };
     },
     computed: {
+        // 鉴定中心
         jdzxList() {
             return this.$store.state.jdzxList.map(f => ({ label: f.orgName, value: f.id }));
         },
@@ -141,10 +140,7 @@ export default {
         },
         // 打印情况
         printList() {
-            return [ 
-                { label:'已打印', value: 1 },
-                { label:'未打印', value: 0 }
-            ]
+            return getPrint();
         }
     },
     watch: {
@@ -157,6 +153,13 @@ export default {
         }
     },
     methods: {
+        // 关键字搜索
+        onSearch(v) {
+            const str = (v || '').trim();
+            this.$set(this.form, 'keyword', str);
+            this.$emit('change', this.form);
+        },
+        // 高级筛选按钮
         onShow() {
             const el = this.$refs.body;
             if(this.bodyHeight === 0) {
@@ -164,24 +167,6 @@ export default {
             } else {
                 this.bodyHeight = 0;
             }
-        },
-        // 重置
-        onReset() {
-            for(let e of this.formList) {
-                this.$set(this.form, e.key, '');
-            }
-            this.$emit('change', this.form);
-        },
-        // 关键字搜索
-        onSearch(v) {
-            const str = (v || '').trim();
-            this.$set(this.form, 'keyword', str);
-            this.$emit('change', this.form);
-        },
-        // 查询
-        onConsult(v) {
-            this.$set(this.form, 'isIndistinct', v);
-            this.$emit('change', this.form);
         },
         // 鉴定中心
         async onJszx(id) {
@@ -203,9 +188,35 @@ export default {
             if(this.receiverList.length === 0) getReceiver(v, this);
             // 检验人
             if(this.surveyorList.length === 0) getSurveyor(v, this);
-            // 操作人
+            // 制作人/审核人/审批人/签发人
             const param = { majorId: v, organId: this.form.evaluationCenter };
             getOperator(param, this);
+        },
+        // 重置按钮
+        onReset() {
+            for(let e of this.formList) {
+                this.$set(this.form, e.key, undefined);
+            }
+            // 模糊查询
+            this.onConsult(1);
+        },
+        // 精确/模糊查询
+        onConsult(v) {
+            this.$set(this.form, 'isIndistinct', v);
+            this.$emit('change', this.form);
+        },
+        // 下拉框选择
+        onChangeItem(v, item) {
+            this.$set(this.form, item.key, v);
+        },
+        // 日期范围选择
+        onChangeDate(v, item) {
+            const arr = v.map(f => f.format('YYYY-MM-DD'));
+            this.onChangeItem(arr, item);
+        },
+        getRange(v) {
+            if(!v) return [];
+            return v.map(f => moment(f));
         },
         filterOption(input, option) {
             return option.componentOptions.children[0].text.toUpperCase().indexOf(input.toUpperCase()) >= 0;
@@ -223,17 +234,6 @@ export default {
         },
         getSelect(k) {
             return this[k] || [];
-        },
-        onChangeItem(v, item) {
-            this.$set(this.form, item.key, v);
-        },
-        onChangeDate(v, item) {
-            const arr = v.map(f => f.format('YYYY-MM-DD'));
-            this.onChangeItem(arr, item);
-        },
-        getRange(v) {
-            if(!v) return [];
-            return v.map(f => moment(f));
         },
     },
 }
