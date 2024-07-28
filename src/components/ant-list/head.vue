@@ -3,7 +3,9 @@
         <!-- 列表头部搜索 -->
         <div class="ant-screen-header">
             <a-input-search allowClear size="large" :placeholder="placeholder" enter-button @search="onSearch" />
-            <a-button size="large" type="primary" @click="onShow">高级筛选</a-button>
+            <div class="dot-btn" :dot="isDot">
+                <a-button size="large" type="primary" @click="onShow">高级筛选</a-button>
+            </div>
             <template>
                 <label>鉴定中心：</label>
                 <a-select
@@ -141,7 +143,14 @@ export default {
         // 打印情况
         printList() {
             return getPrint();
-        }
+        },
+        // 高级筛选中是否有值
+        isDot() {
+            for(let item of this.formList) {
+                if(this.form[item.key]) return true;
+            }
+            return false;
+        },
     },
     watch: {
         'form.evaluationCenter': {
@@ -211,7 +220,7 @@ export default {
         },
         // 日期范围选择
         onChangeDate(v, item) {
-            const arr = v.map(f => f.format('YYYY-MM-DD'));
+            const arr = (v && v.length > 0) ? v.map(f => f.format('YYYY-MM-DD')) : undefined;
             this.onChangeItem(arr, item);
         },
         getRange(v) {
@@ -261,7 +270,7 @@ export default {
     > label{
         margin-left: 30px;
     }
-    > .ant-btn{
+    > .dot-btn{
         margin-left: 10px;
     }
 }
@@ -295,13 +304,32 @@ export default {
         }
     }
     > .right{
-        width: 400px;
+        margin-left: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         .ant-btn{
-            margin: 10px;
+            margin-left: 12px;
+            &:first-child{
+                margin-left: 0;
+            }
         }
+    }
+}
+
+// 高级筛选
+.dot-btn[dot] {
+    position: relative;
+    &::after{
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: red;
+        position: absolute;
+        top: -2px;
+        right: -2px;
     }
 }
 </style>
